@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
-import ProductsDetails from "../components/Products/ProductsDetails";
+import ProductsDetails from "../components/Products/ProductDetailsCopy";
 import { productData } from "../static/data";
 import SuggestedProduct  from "../components/Products/SuggestedProduct";
 

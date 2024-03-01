@@ -8,7 +8,7 @@ import Ratings from "../Products/Ratings";
 import { getAllEventsShop } from "../../redux/actions/event";
 
 const ShopProfileData = ({ isOwner }) => {
-  const { products } = useSelector((state) => state.products);
+  const { products } = useSelector((state) => state.product);
   const { events } = useSelector((state) => state.event);
   const { id } = useParams();
   const dispatch = useDispatch();

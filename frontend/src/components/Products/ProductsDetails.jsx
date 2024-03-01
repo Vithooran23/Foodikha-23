@@ -9,11 +9,14 @@ import {
 import styles from "../../styles/styles";
 import foodi from "../../Assests/image/360_f_651167631_vnj4dfvps1yxytmzrgrvbsxujmzgstjw (1).jpg";
 import { productData } from "../../static/data";
+import { useSelector } from "react-redux";
 
 const ProductsDetails = ({ data }) => {
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setSelect] = useState(0);
+  const { products } = useSelector((state) => state.products);
+
   const navigate = useNavigate();
 
   const incrementCount = () => {
@@ -36,10 +39,42 @@ const ProductsDetails = ({ data }) => {
     dispatch(addToWishlist(data));
   };
 
+  const addToCartHandler = (id) => {
+    const isItemExists = cart && cart.find((i) => i._id === id);
+    if (isItemExists) {
+      toast.error("Item already in cart!");
+    } else {
+      if (data.stock < 1) {
+        toast.error("Product stock limited!");
+      } else {
+        const cartData = { ...data, qty: count };
+        dispatch(addTocart(cartData));
+        toast.success("Item added to cart successfully!");
+      }
+    }
+  };
+
+  const totalReviewsLength =
+    products &&
+    products.reduce((acc, product) => acc + product.reviews.length, 0);
+
+  const totalRatings =
+    products &&
+    products.reduce(
+      (acc, product) =>
+        acc + product.reviews.reduce((sum, review) => sum + review.rating, 0),
+      0
+    );
+
+  const avg =  totalRatings / totalReviewsLength || 0;
+
+  const averageRating = avg.toFixed(2);
+
+
   return (
     <div className="bg-white">
-      {/* {
-      data ? (  */}
+      {
+      // data ? ( 
 
       <div className={`${styles.section} w-[90%] 800px:w-[80%]`}>
         <div className="w-full py-5">
@@ -132,6 +167,8 @@ const ProductsDetails = ({ data }) => {
               </div>
               <div
                 className={`${styles.button} mt-6 rounded-[2px] h-11 flex items-center`}
+                onClick={() => addToCartHandler(data._id)}
+
               >
                 <span className="text-[#fff] flex items-center">
                   Add to cart <AiOutlineShoppingCart className="ml-1" />
@@ -176,8 +213,8 @@ const ProductsDetails = ({ data }) => {
         <br />
         <br />
       </div>
-      {/* ): null
-    } */}
+    //  ): null
+    } 
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { server } from "../../server";
 import styles from "../../styles/styles";
 import foodmaker from "../../Assests/image/Foodikha_event.png"
@@ -11,10 +11,12 @@ import {getAllProductsShop}  from "../../redux/actions/product";
 
 const ShopInfo = ({ isOwner }) => {
   const [data,setData] = useState({});
-  const {products} = useSelector((state) => state.products);
+  const {products} = useSelector((state) => state.product);
   const [isLoading,setIsLoading] = useState(false);
   const {id} = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     dispatch(getAllProductsShop(id));
@@ -34,6 +36,7 @@ const ShopInfo = ({ isOwner }) => {
       withCredentials: true,
       
     });
+    navigate("/");
     window.location.reload();
   };
 

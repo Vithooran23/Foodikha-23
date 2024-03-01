@@ -15,7 +15,7 @@ const DashboardHero = () => {
   const dispatch = useDispatch();
   const { orders } = useSelector((state) => state.order);
   const { seller } = useSelector((state) => state.seller);
-  const { products } = useSelector((state) => state.products);
+  const { products } = useSelector((state) => state.product);
 
   useEffect(() => {
      dispatch(getAllOrdersOfShop(seller?._id));
