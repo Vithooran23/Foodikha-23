@@ -26,17 +26,17 @@ const ProductCard = ({ data }) => {
         <div className="flex justify-end"></div>
         <Link to={`product/${product_name}`}>
           <img
-            src={`${home}`}
+            src={`${data.image_Url?.url}`}
             alt=""
-            className="w-full h-[170px] object-contain "
+            className="w-[95%] h-[170px] object-contain"
           />
         </Link>
         <Link to={"/"}>
-          <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
+          <h5 className={`${styles.shop_name}`}>{data.shop?.name}</h5>
         </Link>
-        <Link to={`product/`}>
+        <Link to={`/product`}>
           <h4 className="pb-3 font-[500]">
-            {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
+            {data.name?.length > 40 ? data?.name.slice(0, 40) + "..." : data?.name}
           </h4>
           <div className="flex">
             <AiFillStar
@@ -69,14 +69,14 @@ const ProductCard = ({ data }) => {
           <div className="py-2 flex items-center justify-between">
             <div className="flex">
               <h5 className={`${styles.productDiscountPrice}`}>
-                {data.price === 0 ? data.price : data.discount_price} Lkr
+                {data.price === 0 ? data?.price : data?.discount_price} Lkr
               </h5>
               <h4 className={`${styles.price}`}>
                 {data.price ? data.price + " Lkr" : null}
               </h4>
             </div>
             <span className="font-[400] text-[17px] text-[#3F1B11]">
-              {data.total_sell} sold
+              {data?.total_sell} sold
             </span>
           </div>
         </Link>

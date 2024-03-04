@@ -17,25 +17,26 @@ const ProductCard = ({ data }) => {
   const [click, setClick] = useState(false);
   const [open, setOpen] = useState(false);
 
- 
+  const d = data?.name;
+  const product_name = d.replace(/\s+/g, "-");
 
   return (
     <>
-      <div className="w-full h-[340px] bg-white rounded-lg shadow-sm p-3  relative cursor-pointer">
+      <div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
         <div className="flex justify-end"></div>
-        <Link to={`product/`}>
+        <Link to={`product/${product_name}`}>
           <img
-            src={`${data.image_Url[0].url}`}
+            src={`${data?.image_Url?.url}`}
             alt=""
-            className="w-full h-[170px] object-contain "
+            className="w-[95%] h-[170px] object-contain"
           />
         </Link>
         <Link to={"/"}>
-          <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
+          <h5 className={`${styles.shop_name}`}>{data?.shop?.name}</h5>
         </Link>
-        <Link to={`product/`}>
+        <Link to={`/product`}>
           <h4 className="pb-3 font-[500]">
-            {data.name.length > 40 ? data.name.slice(0, 60) + "..." : data.name}
+            {data?.name?.length > 40 ? data?.name.slice(0, 40) + "..." : data?.name}
           </h4>
           <div className="flex">
             <AiFillStar
@@ -51,7 +52,8 @@ const ProductCard = ({ data }) => {
             <AiFillStar
               className="mr-2 cursor-pointer"
               size={20}
-              color="#3F1B11"    />
+              color="#3F1B11"
+            />
             <AiFillStar
               className="mr-2 cursor-pointer"
               size={20}
@@ -66,16 +68,16 @@ const ProductCard = ({ data }) => {
 
           <div className="py-2 flex items-center justify-between">
             <div className="flex">
-              {/* <h5 className={`${styles.productDiscountPrice}`}>
-                {data.price === 0 ? data.price : data.discount_price} Lkr
-              </h5> */}
-              {/* <h4 className={`${styles.price}`}>
-                {data.price ? data.price + " Lkr" : null}
-              </h4> */}
+              <h5 className={`${styles.productDiscountPrice}`}>
+                {data?.price === 0 ? data?.price : data?.discount_price} Lkr
+              </h5>
+              <h4 className={`${styles.price}`}>
+                {data?.price ? data?.price + " Lkr" : null}
+              </h4>
             </div>
-            {/* <span className="font-[400] text-[17px] text-[#3F1B11]">
-              {data.total_sell} sold
-            </span> */}
+            <span className="font-[400] text-[17px] text-[#3F1B11]">
+              {data?.total_sell} sold
+            </span>
           </div>
         </Link>
 {/* side options */}
@@ -104,13 +106,7 @@ const ProductCard = ({ data }) => {
             color="#3F1B11"
             title="Quick view"
           />
-          {/* <AiOutlineShoppingCart
-            size={25}
-            className="cursor-pointer absolute right-2 top-24"
-            onClick={() => setOpen(!open)}
-            color="#3F1B11"
-            title="Add to cart"
-          /> */}
+          
           {open ? <ProductDetailsCard   setOpen={setOpen} data={data} /> : null}
         </div>
 

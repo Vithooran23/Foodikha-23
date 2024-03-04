@@ -41,10 +41,19 @@ import {
   ShopWithDrawMoneyPage,
 } from "./Routes/ShopRoutes";
 
+import { 
+  AdminDashboardPage,
+  AdminDashboardUsers,
+  AdminDashboardSellers, 
+  AdminDashboardOrders,
+  AdminDashboardProducts,
+  AdminDashboardEvents,
+  AdminDashboardWithdraw,
+} from "./Routes/AdminRoutes.js";
 import axios from "axios";
-
 import { server } from "./server";
 import SellerProtectedRoute from "./Routes/SellerProtectedRoute";
+import ProtectedAdminRoute from "./Routes/ProtectedAdminRoute";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -99,9 +108,9 @@ const App = () => {
         <Route
           path="/checkout"
           element={
-            // <ProtectedRoute>
-            <CheckoutPage />
-            //  </ProtectedRoute>
+            <ProtectedRoute>
+              <CheckoutPage />
+            </ProtectedRoute>
           }
         />
         <Route path="/order/success" element={<OrderSuccessPage />} />
@@ -116,112 +125,169 @@ const App = () => {
         <Route
           path="/user/order/:id"
           element={
-            // <ProtectedRoute>
-            <OrderDetailsPage />
-            // </ProtectedRoute>
+            <ProtectedRoute>
+              <OrderDetailsPage />
+            </ProtectedRoute>
           }
         />
-         <Route
+        <Route
           path="/user/track/order/:id"
           element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <TrackOrderPage />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
 
-       
         {/* shop Routes */}
         <Route path="/shop-create" element={<ShopCreatePage />} />
         <Route path="/shop-login" element={<ShopLoginPage />} />
         <Route
           path="/shop/:id"
           element={
-            // <SellerProtectedRoute>
-            <ShopHomePage />
-            //  </SellerProtectedRoute>
+            <SellerProtectedRoute>
+              <ShopHomePage />
+            </SellerProtectedRoute>
           }
         />
 
         <Route
           path="/dashboard"
           element={
-            // <SellerProtectedRoute>
-            <ShopDashboardPage />
-            //  </SellerProtectedRoute>
+            <SellerProtectedRoute>
+              <ShopDashboardPage />
+            </SellerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-create-product"
           element={
-            // <SellerProtectedRoute>
-            <ShopCreateProduct />
-            // </SellerProtectedRoute>
+            <SellerProtectedRoute>
+              <ShopCreateProduct />
+            </SellerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-orders"
           element={
-            // <SellerProtectedRoute>
-            <ShopAllOrders />
-            // </SellerProtectedRoute>
+            <SellerProtectedRoute>
+              <ShopAllOrders />
+            </SellerProtectedRoute>
           }
         />
 
         <Route
           path="/dashboard-refunds"
           element={
-            // <SellerProtectedRoute>
-            <ShopAllRefunds />
-            // </SellerProtectedRoute>
+            <SellerProtectedRoute>
+              <ShopAllRefunds />
+            </SellerProtectedRoute>
           }
         />
         <Route
           path="/order/:id"
           element={
-            // <SellerProtectedRoute>
-            <ShopOrderDetails />
-            // </SellerProtectedRoute>
+            <SellerProtectedRoute>
+              <ShopOrderDetails />
+            </SellerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-products"
           element={
-            // <SellerProtectedRoute>
-            <ShopAllProducts />
-            // </SellerProtectedRoute>
+            <SellerProtectedRoute>
+              <ShopAllProducts />
+            </SellerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-create-event"
           element={
-            // <SellerProtectedRoute>
-            <ShopCreateEvents />
-            // </SellerProtectedRoute>
+            <SellerProtectedRoute>
+              <ShopCreateEvents />
+            </SellerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-withdraw-money"
           element={
-            // <SellerProtectedRoute>
-            <ShopWithDrawMoneyPage />
-            // </SellerProtectedRoute>
+            <SellerProtectedRoute>
+              <ShopWithDrawMoneyPage />
+            </SellerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-events"
           element={
-            // <SellerProtectedRoute>
-            <ShopAllEvents />
-            // </SellerProtectedRoute>
+            <SellerProtectedRoute>
+              <ShopAllEvents />
+            </SellerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-coupouns"
           element={
-            // <SellerProtectedRoute>
+            <SellerProtectedRoute>
               <ShopAllCoupouns />
-            // </SellerProtectedRoute>
+            </SellerProtectedRoute>
+          }
+        />
+
+        {/* Admin Routes */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            // <ProtectedAdminRoute>
+              <AdminDashboardPage />
+            // </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin-users"
+          element={
+            // <ProtectedAdminRoute>
+              <AdminDashboardUsers />
+            // </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin-sellers"
+          element={
+            // <ProtectedAdminRoute>
+              <AdminDashboardSellers />
+            // </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin-orders"
+          element={
+            // <ProtectedAdminRoute>
+              <AdminDashboardOrders />
+            // </ProtectedAdminRoute>
+          }
+        />
+         <Route
+          path="/admin-products"
+          element={
+            // <ProtectedAdminRoute>
+              <AdminDashboardProducts />
+            // </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin-events"
+          element={
+            // <ProtectedAdminRoute>
+              <AdminDashboardEvents />
+            // </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin-withdraw-request"
+          element={
+            // <ProtectedAdminRoute>
+              <AdminDashboardWithdraw />
+            // </ProtectedAdminRoute>
           }
         />
       </Routes>

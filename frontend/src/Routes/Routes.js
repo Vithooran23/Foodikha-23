@@ -5,7 +5,7 @@ import HomePage from '../pages/HomePage'
 import ProductsPage from '../pages/ProductsPage';
 import FAQPage from '../pages/FAQPage.jsx';
 // import ProductDetailsPage from '../pages/ProductDetailsPage';
-import ProductDetailsPage from '../pages/ProductDetailsPage copy';
+import ProductDetailsPage from '../pages/ProductDetailsPage';
 
 import ProfilePage from '../pages/ProfilePage'
 import CheckoutPage from "../pages/CheckoutPage";

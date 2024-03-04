@@ -6,7 +6,7 @@ import BestDeals from "../components/Route/BestDeals/BestDeals";
 import FeaturedProduct from "../components/Route/FeaturedProduct/FeaturedProduct";
 import Events from "../components/Events/Events";
 import Footer from "../components/Layout/Footer.jsx";
-import ProductsDetails from '../components/Products/ProductsDetails';
+
 
 
 
@@ -22,10 +22,6 @@ const HomePage = () => {
         <FeaturedProduct />
         <Footer />
       
-
-
-
-
     </div>
   )
 }
