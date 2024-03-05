@@ -22,7 +22,7 @@ const CountDown = ({ data }) => {
   });
 
   function calculateTimeLeft() {
-    const difference = +new Date('2024-02-23') - +new Date();
+    const difference = +new Date('2024-02-27') - +new Date();
     let timeLeft = {};
 
     if (difference > 0) {

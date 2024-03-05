@@ -18,7 +18,7 @@ import { addTocart } from "../../redux/actions/cart";
 import { toast } from "react-toastify";
 import Ratings from "./Ratings";
 import axios from "axios";
-import foodi from "../../Assests/image/360_f_651167631_vnj4dfvps1yxytmzrgrvbsxujmzgstjw (1).jpg";
+
 
 const ProductDetails = ({ data }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -61,12 +61,12 @@ const ProductDetails = ({ data }) => {
   };
 
   const addToCartHandler = (id) => {
-    const isItemExists = cart && cart.find((i) => i._id === id);
+    const isItemExists = cart && cart.find((i) => i?._id === id);
     if (isItemExists) {
-      toast.error("Item already in cart!");
+      toast?.error("Item already in cart!");
     } else {
-      if (data.stock < 1) {
-        toast.error("Product stock limited!");
+      if (data?.stock < count) {
+        toast?.error("Product stock limited!");
       } else {
         const cartData = { ...data, qty: count };
         dispatch(addTocart(cartData));
@@ -100,62 +100,30 @@ const ProductDetails = ({ data }) => {
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%] mt-9">
                 <img
-                  // src={`${data && data.images[select]?.url}`}
-                src={foodi}
+                  src={`${data && data.images[select]?.url}`}
+               
                   alt=""
                   className="w-[80%]"
                 />
-                <div className="w-full flex">
-                  {data &&
-                    data.images.map((i, index) => (
-                      <div
-                        className={`${
-                          select === 0 ? "border" : "null"
-                        } cursor-pointer`}
-                      >
-                        <img
-                          src={`${i?.url}`}
-                          alt=""
-                          className="h-[200px] overflow-hidden mr-3 mt-3"
-                          onClick={() => setSelect(index)}
-                        />
-                      </div>
-                    ))}
-                  <div
-                    className={`${
-                      select === 1 ? "border" : "null"
-                    } cursor-pointer`}
-                  ></div>
-                </div>
+                
               </div>
               <div className="w-full 800px:w-[50%] pt-5 ">
                 <h1 className={`${styles.productTitle}`}>
-                  {/* {data?.name} */}
-                  History of dosa says they were made using only rice but with the
-                passage of time
+                  {data?.name}
+                 
                 </h1>
                 <p>
-                  {/* {data?.description} */}
-                  Product details are a crucial part of any eCommerce website or
-                online marketplace. These details help the potential customers
-                to make an informed decision about the product they are
-                interested in buying. A well-written product description can
-                also be a powerful marketing tool that can help to increase
-                sales.Product details typically include information about the
-                product's features, specifications, dimensions, weight,
-                materials, and other relevant information that can help
-                customers to understand the product better. The product details
-                section should also include high-quality images and videos of
-                the product, as well as customer reviews and ratings.
+                  {data?.description}
+                 
                 </p>
                 <div className="flex pt-3">
                   <h4 className={`${styles.productDiscountPrice}`}>
-                    {/* {data?.discountPrice} */}
-                     40 LKR
+                    {data?.discountPrice} LKR
+                     
                   </h4>
                   <h3 className={`${styles.price}`}>
-                    {/* {data?.originalPrice ? data?.originalPrice + "$" : null} */}
-                    50
+                    {data?.originalPrice ? data?.originalPrice + "LKR" : null}
+                   
                   </h3>
                 </div>
 

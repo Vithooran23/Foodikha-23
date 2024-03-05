@@ -9,10 +9,10 @@ const Navbar = ({active}) => {
          {
             navItems && navItems.map((i,index) => (
                 <div className="flex">
-                    <Link to={i.url}
+                    <Link to={i?.url}
                     className={`${active === index + 1 ? "text-[#824e3f]" : "text-black 800px:text-[#fff]"} pb-[30px] 800px:pb-0 font-[500] px-6 cursor-pointer}`}
                     >
-                    {i.title}
+                    {i?.title}
                     </Link>
                 </div>
             ))

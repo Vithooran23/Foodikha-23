@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../../../styles/styles";
-import banner from "../../../Assests/image/banner_bg.jpg"
+import { brandingData } from "../../../static/data";
 
 
 const Hero = () => {
   return (
     <div
-      className={`relative min-h-[70vh] 800px:min-h-[80vh] w-full bg-no-repeat ${styles.noramlFlex}`}
+      className={`relative min-h-[60vh] 800px:min-h-[65vh] w-full bg-no-repeat ${styles.noramlFlex}`}
       style={{
         backgroundImage:
           "url()",
@@ -33,11 +33,13 @@ const Hero = () => {
             </div>
         </Link>
       </div>
-      {/* <div className={`${styles.section1} w-[50%] 800px:w-[60%]`}>
-
-        </div> */}
+         
 
     </div>
+    
+    
+
+
   );
 };
 

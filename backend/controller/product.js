@@ -87,7 +87,7 @@ router.delete(
 
       for (let i = 0; 1 < product.images.length; i++) {
         const result = await cloudinary.v2.uploader.destroy(
-          product.images[i].public_id
+          product.images[i]?.public_id
         );
       }
     

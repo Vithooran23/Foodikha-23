@@ -11,7 +11,7 @@ const Ratings = ({ rating }) => {
         <AiFillStar
           key={i}
           size={20}
-          color="#f6b100"
+          color="#3F1B11"
           className="mr-2 cursor-pointer"
         />
       );
@@ -20,7 +20,7 @@ const Ratings = ({ rating }) => {
         <BsStarHalf
           key={i}
           size={17}
-          color="#f6ba00"
+          color="#3F1B11"
           className="mr-2 cursor-pointer"
         />
       );
@@ -29,7 +29,7 @@ const Ratings = ({ rating }) => {
         <AiOutlineStar
           key={i}
           size={20}
-          color="#f6ba00"
+          color="#3F1B11"
           className="mr-2 cursor-pointer"
         />
       );

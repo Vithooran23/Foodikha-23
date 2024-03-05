@@ -74,7 +74,7 @@ export const deleteProduct = (id) => async (dispatch) => {
     });
 
     const { data } = await axios.delete(
-      `${server}/product/delete-shop-product/${id}`,
+      `${server}/product/delete-shop-product/:id`,
       {
         withCredentials: true,
       }
@@ -102,7 +102,7 @@ export const getAllProducts = () => async (dispatch) => {
     const { data } = await axios.get(`${server}/product/get-all-products`);
     dispatch({
       type: "getAllProductsSuccess",
-      payload: data.products,
+      payload: data?.products,
     });
   } catch (error) {
     dispatch({

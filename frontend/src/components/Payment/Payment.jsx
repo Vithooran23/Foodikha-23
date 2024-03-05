@@ -9,6 +9,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { server } from "../../server";
@@ -20,7 +21,7 @@ const Payment = () => {
   const [open, setOpen] = useState(false);
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
-  const stripe = useStripe("");
+  const stripe = useStripe();
   const elements = useElements();
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const Payment = () => {
           {
             description: "Sunflower",
             amount: {
-              currency_code: "Lkr",
+              currency_code: "USD",
               value: orderData?.totalPrice,
             },
           },
@@ -69,30 +70,30 @@ const Payment = () => {
     });
   };
 
-  // const paypalPaymentHandler = async (paymentInfo) => {
-  //   const config = {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   };
+  const paypalPaymentHandler = async (paymentInfo) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-  //   order.paymentInfo = {
-  //     id: paymentInfo.payer_id,
-  //     status: "succeeded",
-  //     type: "Paypal",
-  //   };
+    order.paymentInfo = {
+      id: paymentInfo?.payer_id,
+      status: "succeeded",
+      type: "Paypal",
+    };
 
-  //   await axios
-  //     .post(`${server}/order/create-order`, order, config)
-  //     .then((res) => {
-  //       setOpen(false);
-  //       navigate("/order/success");
-  //       toast.success("Order successful!");
-  //       localStorage.setItem("cartItems", JSON.stringify([]));
-  //       localStorage.setItem("latestOrder", JSON.stringify([]));
-  //       window.location.reload();
-  //     });
-  // };
+    await axios
+      .post(`${server}/order/create-order`, order, config)
+      .then((res) => {
+        setOpen(false);
+        navigate("/order/success");
+        toast.success("Order successful!");
+        localStorage.setItem("cartItems", JSON.stringify([]));
+        localStorage.setItem("latestOrder", JSON.stringify([]));
+        window.location.reload();
+      });
+  };
 
   const paymentData = {
     amount: Math.round(orderData?.totalPrice * 100),
@@ -216,11 +217,11 @@ const PaymentInfo = ({
             className="w-[25px] h-[25px] rounded-full bg-transparent border-[3px] border-[#1d1a1ab4] relative flex items-center justify-center"
             onClick={() => setSelect(1)}
           >
-            {select === 2 ? (
+            {select === 1 ? (
               <div className="w-[13px] h-[13px] bg-[#1d1a1acb] rounded-full" />
             ) : null}
           </div>
-          <h4 className="text-[18px] pl-2 font-[600] text-[#000]">
+          <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
             Pay with Debit/credit card
           </h4>
         </div>
@@ -320,7 +321,8 @@ const PaymentInfo = ({
       </div>
 
       <br />
-     
+      
+
       <br />
       {/* cash on delivery */}
       <div>
@@ -333,7 +335,7 @@ const PaymentInfo = ({
               <div className="w-[13px] h-[13px] bg-[#1d1a1acb] rounded-full" />
             ) : null}
           </div>
-          <h4 className="text-[18px] pl-2 font-[600] text-[#000]">
+          <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
             Cash on Delivery
           </h4>
         </div>
@@ -374,7 +376,7 @@ const CartData = ({ orderData }) => {
         <h5 className="text-[18px] font-[600]">{orderData?.discountPrice? "$" + orderData.discountPrice : "-"}</h5>
       </div>
       <h5 className="text-[18px] font-[600] text-end pt-3">
-        ${orderData?.totalPrice}
+        LKR {orderData?.totalPrice}
       </h5>
       <br />
     </div>

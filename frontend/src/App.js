@@ -70,7 +70,7 @@ const App = () => {
     Store.dispatch(loadSeller());
     Store.dispatch(getAllProducts());
     Store.dispatch(getAllEvents());
-    // getStripeApikey();
+    getStripeApikey();
   }, []);
 
   return (
@@ -103,14 +103,14 @@ const App = () => {
           element={<SellerActivationPage />}
         />
         <Route path="/products" element={<ProductsPage />} />
-        <Route path="/product/:name" element={<ProductDetailsPage />} />
+        <Route path="/product/:id" element={<ProductDetailsPage />} />
         <Route path="/faq" element={<FAQPage />} />
         <Route
           path="/checkout"
           element={
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <CheckoutPage />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           }
         />
         <Route path="/order/success" element={<OrderSuccessPage />} />

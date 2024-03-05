@@ -3,6 +3,7 @@ import styles from "../../styles/styles";
 import CountDown from "./CountDown";
 import { Link } from "react-router-dom";
 import foodikha from "../../Assests/image/Foodikha_event.png"
+import { useDispatch } from "react-redux";
 
 
 
