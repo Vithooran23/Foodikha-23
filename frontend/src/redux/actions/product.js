@@ -56,12 +56,12 @@ export const getAllProductsShop = (id) => async (dispatch) => {
     );
     dispatch({
       type: "getAllProductsShopSuccess",
-      payload: data.products,
+      payload: data?.products,
     });
   } catch (error) {
     dispatch({
       type: "getAllProductsShopFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message,
     });
   }
 };
@@ -82,12 +82,12 @@ export const deleteProduct = (id) => async (dispatch) => {
 
     dispatch({
       type: "deleteProductSuccess",
-      payload: data.message,
+      payload: data?.message,
     });
   } catch (error) {
     dispatch({
       type: "deleteProductFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message,
     });
   }
 };
@@ -107,7 +107,7 @@ export const getAllProducts = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "getAllProductsFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message,
     });
   }
 };

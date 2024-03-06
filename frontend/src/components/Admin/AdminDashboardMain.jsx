@@ -36,7 +36,7 @@ const AdminDashboardMain = () => {
       flex: 0.7,
       cellClassName: (params) => {
         return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
+          ? "#3F1B11"
           : "redColor";
       },
     },
@@ -68,9 +68,9 @@ const AdminDashboardMain = () => {
   adminOrders &&
   adminOrders.forEach((item) => {
       row.push({
-        id: item._id,
-        itemsQty: item?.cart?.reduce((acc, item) => acc + item.qty, 0),
-        total: item?.totalPrice + " $",
+        id: item?._id,
+        itemsQty: item?.cart?.reduce((acc, item) => acc + item?.qty, 0),
+        total: item?.totalPrice + " LKR",
         status: item?.status,
         createdAt: item?.createdAt.slice(0,10),
       });
@@ -110,7 +110,7 @@ const AdminDashboardMain = () => {
                 All Sellers
               </h3>
             </div>
-            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{sellers && sellers.length}</h5>
+            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{sellers && sellers?.length}</h5>
             <Link to="/admin-sellers">
               <h5 className="pt-4 pl-2 text-[#3F1B11]">View Sellers</h5>
             </Link>

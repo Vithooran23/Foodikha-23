@@ -16,7 +16,7 @@ const AllProducts = () => {
 
   useEffect(() => {
     axios.get(`${server}/product/admin-all-products`, {withCredentials: true}).then((res) => {
-        setData(res.data.products);
+        setData(res?.data?.products);
     })
   }, []);
 
@@ -75,10 +75,10 @@ const AllProducts = () => {
   data &&
   data.forEach((item) => {
       row.push({
-        id: item._id,
-        name: item.name,
-        price: "US$ " + item.discountPrice,
-        Stock: item.stock,
+        id: item?._id,
+        name: item?.name,
+        price: "LKR " + item?.discountPrice,
+        Stock: item?.stock,
         sold: item?.sold_out,
       });
     });

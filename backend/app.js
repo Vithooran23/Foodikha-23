@@ -35,7 +35,7 @@ const order = require("./controller/order");
 const product = require("./controller/product");
 const event = require("./controller/event");
 const coupon = require("./controller/coupounCode");
-
+const withdraw = require("./controller/withdraw");
 
 
 app.use("/api/user", user);
@@ -45,8 +45,7 @@ app.use("/api/order", order);
 app.use("/api/product", product);
 app.use("/api/event", event);
 app.use("/api/coupon", coupon);
-
-
+app.use("/api/withdraw", withdraw);
 
 
 // it's for ErrorHandling

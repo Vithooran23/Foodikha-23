@@ -22,10 +22,10 @@ const UserOrderDetails = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getAllOrdersOfUser(user._id));
-  }, [dispatch,user._id]);
+    dispatch(getAllOrdersOfUser(user?._id));
+  }, [dispatch,user?._id]);
 
-  const data = orders && orders.find((item) => item._id === id);
+  const data = orders && orders.find((item) => item?._id === id);
 
   const reviewHandler = async (e) => {
     await axios
@@ -96,7 +96,7 @@ const UserOrderDetails = () => {
             <div className="w-full">
               <h5 className="pl-3 text-[20px]">{item.name}</h5>
               <h5 className="pl-3 text-[20px] text-[#00000091]">
-                US${item.discountPrice} x {item.qty}
+                LKR {item?.discountPrice} x {item?.qty}
               </h5>
             </div>
             {!item.isReviewed && data?.status === "Delivered" ?  <div
@@ -135,7 +135,7 @@ const UserOrderDetails = () => {
               <div>
                 <div className="pl-3 text-[20px]">{selectedItem?.name}</div>
                 <h4 className="pl-3 text-[20px]">
-                  US${selectedItem?.discountPrice} x {selectedItem?.qty}
+                  LKR {selectedItem?.discountPrice} x {selectedItem?.qty}
                 </h4>
               </div>
             </div>
@@ -199,7 +199,7 @@ const UserOrderDetails = () => {
 
       <div className="border-t w-full text-right">
         <h5 className="pt-3 text-[18px]">
-          Total Price: <strong>US${data?.totalPrice}</strong>
+          Total Price: <strong>LKR {data?.totalPrice}</strong>
         </h5>
       </div>
       <br />
@@ -208,12 +208,12 @@ const UserOrderDetails = () => {
         <div className="w-full 800px:w-[60%]">
           <h4 className="pt-3 text-[20px] font-[600]">Shipping Address:</h4>
           <h4 className="pt-3 text-[20px]">
-            {data?.shippingAddress.address1 +
+            {data?.shippingAddress?.address1 +
               " " +
-              data?.shippingAddress.address2}
+              data?.shippingAddress?.address2}
           </h4>
-          <h4 className=" text-[20px]">{data?.shippingAddress.country}</h4>
-          <h4 className=" text-[20px]">{data?.shippingAddress.city}</h4>
+          <h4 className=" text-[20px]">{data?.shippingAddress?.country}</h4>
+          <h4 className=" text-[20px]">{data?.shippingAddress?.city}</h4>
           <h4 className=" text-[20px]">{data?.user?.phoneNumber}</h4>
         </div>
         <div className="w-full 800px:w-[40%]">

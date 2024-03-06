@@ -108,9 +108,9 @@ const App = () => {
         <Route
           path="/checkout"
           element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <CheckoutPage />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
         <Route path="/order/success" element={<OrderSuccessPage />} />
@@ -125,9 +125,9 @@ const App = () => {
         <Route
           path="/user/order/:id"
           element={
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <OrderDetailsPage />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           }
         />
         <Route

@@ -119,14 +119,14 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
             className={`bg-white border border-[#3F1B11] rounded-full w-[25px] h-[25px] ${styles.noramlFlex} justify-center cursor-pointer`}
             onClick={() => increment(data)}
           >
-            <HiPlus size={18} color="#fff" />
+            <HiPlus size={18} color="#3F1B11" />
           </div>
           <span className="pl-[10px]">{data?.qty}</span>
           <div
-            className="bg-[#a7abb14f] rounded-full w-[25px] h-[25px] flex items-center justify-center cursor-pointer"
+            className="bg-white border border-[#3F1B11] rounded-full w-[25px] h-[25px] flex items-center justify-center cursor-pointer"
             onClick={() => decrement(data)}
           >
-            <HiOutlineMinus size={16} color="#7d879c" />
+            <HiOutlineMinus size={16} color="#3F1B11" />
           </div>
         </div>
         <img
@@ -146,6 +146,8 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
         <RxCross1
           className="cursor-pointer"
           onClick={() => removeFromCartHandler(data)}
+          size={30}
+
         />
       </div>
     </div>

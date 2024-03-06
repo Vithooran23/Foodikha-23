@@ -70,6 +70,7 @@ const ProductDetails = ({ data }) => {
       } else {
         const cartData = { ...data, qty: count };
         dispatch(addTocart(cartData));
+        console.log(cartData)
         toast.success("Item added to cart successfully!");
       }
     }

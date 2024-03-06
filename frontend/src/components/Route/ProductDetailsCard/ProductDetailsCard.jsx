@@ -22,7 +22,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
-   const [select, setSelect] = useState(false);
+  //  const [select, setSelect] = useState(false);
 
 
   const handleMessageSubmit = () => {};
@@ -90,7 +90,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 
                 />
                 <div className="flex">
-                  <Link to={`/shop/preview/${data.shop._id}`} className="flex">
+                  <Link to={`/shop/${data.shop?._id}`} className="flex">
                     <img
                       src={`${data?.images && data?.images[0]?.url}`}
                       alt=""

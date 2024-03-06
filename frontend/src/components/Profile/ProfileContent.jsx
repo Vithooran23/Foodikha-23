@@ -1,81 +1,107 @@
-import React, { useEffect, useState } from "react";
-import { AiOutlineArrowRight, AiOutlineCamera } from "react-icons/ai";
+import React, { useState } from "react";
+import {
+  AiOutlineArrowRight,
+  AiOutlineCamera,
+  AiOutlineDelete,
+} from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
+import { server } from "../../server";
 import styles from "../../styles/styles";
-import profile from "../../Assests/image/3.jpg"
-import { Link } from "react-router-dom";
-
-import { DataGrid } from '@mui/x-data-grid';
-import { toast } from "react-toastify";
 import { Button } from "@mui/material";
+import { DataGrid } from '@mui/x-data-grid';
+import { Link } from "react-router-dom";
 import { MdTrackChanges } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
-import { server } from "../../server";
+import {
+  deleteUserAddress,
+  loadUser,
+  updatUserAddress,
+  updateUserInformation,
+} from "../../redux/actions/user";
+import { Country, State } from "country-state-city";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
 import { getAllOrdersOfUser } from "../../redux/actions/order";
 
-
-
-const ProfileContent = ({active}) => {
+const ProfileContent = ({ active }) => {
   const { user, error, successMessage } = useSelector((state) => state.user);
   const [name, setName] = useState(user && user.name);
   const [email, setEmail] = useState(user && user.email);
   const [phoneNumber, setPhoneNumber] = useState(user && user.phoneNumber);
   const [password, setPassword] = useState("");
-  const [zipCode, setZipCode] = useState(user && user.zipCode);
-  const [address1, setAddress1] = useState(user && user.address1);
-  const [address2, setAddress2] = useState(user && user.address2);
-
-
-
   const [avatar, setAvatar] = useState(null);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     if (error) {
-        toast.error(error);
-        dispatch({ type: "clearErrors" });
-      }
-      if (successMessage) {
-        toast.success(successMessage);
-        dispatch({ type: "clearMessages" });
-      }
-    }, [error, successMessage]);
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      dispatch(updateUserInformation(name, email, phoneNumber, password));
-    };
-  
-    
+      toast.error(error);
+      dispatch({ type: "clearErrors" });
+    }
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch({ type: "clearMessages" });
+    }
+  }, [error, successMessage]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updateUserInformation(name, email, phoneNumber, password));
+  };
+
+  const handleImage = async (e) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatar(reader.result);
+        axios
+          .put(
+            `${server}/user/update-avatar`,
+            { avatar: reader.result },
+            {
+              withCredentials: true,
+            }
+          )
+          .then((response) => {
+            dispatch(loadUser());
+            toast.success("avatar updated successfully!");
+          })
+          .catch((error) => {
+            toast.error(error);
+          });
+      }
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
+  };
 
   return (
     <div className="w-full">
       {/* profile */}
       {active === 1 && (
-      <>
-        <div className="flex justify-center w-full">
-          <div className="relative">
-            <img
-              src={`${profile}`}
-              className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#3F1B11]"
-              alt=""
-            />
-            <div className="w-[30px] h-[30px] bg-[#E3E9EE] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[5px] right-[5px]">
-              <input
-                type="file"
-                id="image"
-                className="hidden"
-                //  onChange={handleImage}
+        <>
+          <div className="flex justify-center w-full">
+            <div className="relative">
+              <img
+                src={`${user?.avatar?.url}`}
+                className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#3F1B11]"
+                alt=""
               />
-              <label htmlFor="image">
-                <AiOutlineCamera />
-              </label>
+              <div className="w-[30px] h-[30px] bg-[#E3E9EE] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[5px] right-[5px]">
+                <input
+                  type="file"
+                  id="image"
+                  className="hidden"
+                  onChange={handleImage}
+                />
+                <label htmlFor="image">
+                  <AiOutlineCamera />
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        <br />
+          <br />
           <br />
           <div className="w-full px-5">
             <form onSubmit={handleSubmit} aria-required={true}>
@@ -125,65 +151,18 @@ const ProfileContent = ({active}) => {
                   />
                 </div>
               </div>
-              <div className="w-full 800px:flex block pb-3">
-                <div className=" w-[100%] 800px:w-[50%]">
-                  <label className="block pb-2">Zip Code</label>
-                  <input
-                    type="number"
-                    className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
-                    required
-                    value={zipCode}
-                    onChange={(e) => setZipCode(e.target.value)}
-                  />
-                </div>
-
-                <div className=" w-[100%] 800px:w-[50%]">
-                  <label className="block pb-2">Address 1</label>
-                  <input
-                    type="text"
-                    className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
-                    required
-                    value={address1}
-                    onChange={(e) => setAddress1(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="w-full 800px:flex block pb-3">
-                {/* <div className=" w-[100%] 800px:w-[50%]">
-                  <label className="block pb-2">Zip Code</label>
-                  <input
-                    type="number"
-                    className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
-                    required
-                    value={zipCode}
-                    onChange={(e) => setZipCode(e.target.value)}
-                  />
-                </div> */}
-
-                <div className=" w-[100%] 800px:w-[50%]">
-                  <label className="block pb-2">Address 2</label>
-                  <input
-                    type="text"
-                    className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
-                    required
-                    value={address2}
-                    onChange={(e) => setAddress2(e.target.value)}
-                  />
-                </div>
-              </div>
               <input
-                className={`w-[250px] h-[40px] border border-[#824e3f] text-center text-[#ffffff] bg-[#824e3f] rounded-[3px] mt-8 cursor-pointer`}
+                className={`w-[250px] h-[40px] border bg-[#824e3f] border-[#3F1B11] text-center text-[#fff] rounded-[3px] mt-8 cursor-pointer`}
                 required
                 value="Update"
                 type="submit"
               />
             </form>
           </div>
-      </>
+        </>
       )}
-    
 
-           {/* order */}
+      {/* order */}
       {active === 2 && (
         <div>
           <AllOrders />
@@ -217,17 +196,7 @@ const ProfileContent = ({active}) => {
           <Address />
         </div>
       )}
-
-      {/*  Log- Out */}
-      {active === 8 && (
-        <div>
-          <Logout />
-        </div>
-      )}
-
     </div>
-    
-    
   );
 };
 
@@ -237,21 +206,8 @@ const AllOrders = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllOrdersOfUser(user._id));
+    dispatch(getAllOrdersOfUser(user?._id));
   }, []);
-//   const orders = [
-//     {
-//     _id:"qwert1234asd",
-//     orderItems:[ 
-//      {
-//       name: "Achchi Thosa",
-
-//     },
-//     ],
-//     totalPrice : 360,
-//     orderStatus :"Processing",
-//   },
-// ];
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
@@ -262,8 +218,8 @@ const AllOrders = () => {
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
+        return params?.getValue(params?.id, "status") === "Delivered"
+          ? "#3F1B11"
           : "redColor";
       },
     },
@@ -293,7 +249,7 @@ const AllOrders = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/order/${params.id}`}>
+            <Link to={`/user/order/${params.id}`}>
               <Button>
                 <AiOutlineArrowRight size={20} />
               </Button>
@@ -309,10 +265,10 @@ const AllOrders = () => {
   orders &&
     orders.forEach((item) => {
       row.push({
-        id: item._id,
-        itemsQty: item.orderItems.length,
-        total: "Lkr " + item.totalPrice,
-        status: item.orderStatus,
+        id: item?._id,
+        itemsQty: item.cart?.length,
+        total: "LKR " + item?.totalPrice,
+        status: item?.status,
       });
     });
 
@@ -335,20 +291,8 @@ const AllRefundOrders = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllOrdersOfUser(user._id));
+    dispatch(getAllOrdersOfUser(user?._id));
   }, []);
-//   const orders = [
-//     {
-//     _id:"qwert1234asd",
-//     orderItems:[ 
-//      {
-//       name: "Achchi Thosa",
-//     },
-//     ],
-//     totalPrice : 360,
-//     orderStatus :"Processing",
-//   },
-// ];
 
   const eligibleOrders =
     orders && orders.filter((item) => item.status === "Processing refund");
@@ -363,7 +307,7 @@ const AllRefundOrders = () => {
       flex: 0.7,
       cellClassName: (params) => {
         return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
+          ? "#3F1B11"
           : "redColor";
       },
     },
@@ -409,9 +353,9 @@ const AllRefundOrders = () => {
   eligibleOrders &&
     eligibleOrders.forEach((item) => {
       row.push({
-        id: item._id,
-        itemsQty: item.cart.length,
-        total: "US$ " + item.totalPrice,
+        id: item?._id,
+        itemsQty: item.cart?.length,
+        total: "LKR " + item?.totalPrice,
         status: item.status,
       });
     });
@@ -435,23 +379,8 @@ const TrackOrder = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllOrdersOfUser(user._id));
+    dispatch(getAllOrdersOfUser(user?._id));
   }, []);
-
-//   const orders = [
-//     {
-//     _id:"qwert1234asd",
-//     orderItems:[ 
-//      {
-//       name: "Achchi Thosa",
-
-//     },
-//     ],
-//     totalPrice : 360,
-//     orderStatus :"Processing",
-//   },
-// ];
-
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
@@ -461,11 +390,11 @@ const TrackOrder = () => {
       headerName: "Status",
       minWidth: 130,
       flex: 0.7,
-      // cellClassName: (params) => {
-      //   return params.getValue(params.id, "status") === "Delivered"
-      //     ? "greenColor"
-      //     : "redColor";
-      // },
+      cellClassName: (params) => {
+        return params.getValue(params.id, "status") === "Delivered"
+          ? "greenColor"
+          : "redColor";
+      },
     },
     {
       field: "itemsQty",
@@ -509,10 +438,10 @@ const TrackOrder = () => {
   orders &&
     orders.forEach((item) => {
       row.push({
-        id: item._id,
-        itemsQty: item.orderItems.length,
-        total: "US$ " + item.totalPrice,
-        status: item.status,
+        id: item?._id,
+        itemsQty: item?.cart?.length,
+        total: "LKR " + item?.totalPrice,
+        status: item?.status,
       });
     });
 
@@ -594,7 +523,7 @@ const ChangePassword = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <input
-              className={`w-[95%] h-[40px] border border-[#824e3f] text-center text-[#ffffff] bg-[#824e3f] rounded-[3px] mt-8 cursor-pointer`}
+              className={`w-[95%] h-[40px] border bg-[#824e3f] border-[#3F1B11] text-center text-[#fff] rounded-[3px] mt-8 cursor-pointer`}
               required
               value="Update"
               type="submit"
@@ -646,8 +575,8 @@ const Address = () => {
         )
       );
       setOpen(false);
-      setCountry(false);
-      setCity(flase);
+      setCountry("");
+      setCity("");
       setAddress1("");
       setAddress2("");
       setZipCode(null);
@@ -656,7 +585,7 @@ const Address = () => {
   };
 
   const handleDelete = (item) => {
-    const id = item._id;
+    const id = item?._id;
     dispatch(deleteUserAddress(id));
   };
 
@@ -676,7 +605,7 @@ const Address = () => {
               Add New Address
             </h1>
             <div className="w-full">
-              <form aria-required onSubmit={handleSubmit} className="w-full   " >
+              <form aria-required onSubmit={handleSubmit} className="w-full">
                 <div className="w-full block p-4">
                   <div className="w-full pb-2">
                     <label className="block pb-2">Country</label>
@@ -690,14 +619,14 @@ const Address = () => {
                       <option value="" className="block border pb-2">
                         choose your country
                       </option>
-                      {country &&
-                        country.getAllCountries().map((item) => (
+                      {Country &&
+                        Country.getAllCountries().map((item) => (
                           <option
                             className="block pb-2"
                             key={item.isoCode}
                             value={item.isoCode}
                           >
-                            {item.name}
+                            {item?.name}
                           </option>
                         ))}
                     </select>
@@ -715,14 +644,14 @@ const Address = () => {
                       <option value="" className="block border pb-2">
                         choose your city
                       </option>
-                      {city &&
-                        city.getStatesOfCountry(country).map((item) => (
+                      {State &&
+                        State.getStatesOfCountry(country).map((item) => (
                           <option
                             className="block pb-2"
                             key={item.isoCode}
                             value={item.isoCode}
                           >
-                            {item.name}
+                            {item?.name}
                           </option>
                         ))}
                     </select>
@@ -788,7 +717,7 @@ const Address = () => {
                   <div className=" w-full pb-2">
                     <input
                       type="submit"
-                      className={`${styles.input} mt-5 cursor-pointer`}
+                      className={`${styles.input} mt-5 bg-[#824e3f] text-[#fff] cursor-pointer`}
                       required
                       readOnly
                     />
@@ -818,16 +747,16 @@ const Address = () => {
             key={index}
           >
             <div className="flex items-center">
-              <h5 className="pl-5 font-[600]">{item.addressType}</h5>
+              <h5 className="pl-5 font-[600]">{item?.addressType}</h5>
             </div>
             <div className="pl-8 flex items-center">
               <h6 className="text-[12px] 800px:text-[unset]">
-                {item.address1} {item.address2}
+                {item?.address1} {item?.address2}
               </h6>
             </div>
             <div className="pl-8 flex items-center">
               <h6 className="text-[12px] 800px:text-[unset]">
-                {user && user.phoneNumber}
+                {user && user?.phoneNumber}
               </h6>
             </div>
             <div className="min-w-[10%] flex items-center justify-between pl-8">
@@ -848,5 +777,4 @@ const Address = () => {
     </div>
   );
 };
-
 export default ProfileContent;

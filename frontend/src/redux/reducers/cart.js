@@ -1,8 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 // Define action types
-const ADD_TO_CART = 'ADD_TO_CART';
-const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+const ADD_TO_CART = 'addToCart';
+const REMOVE_FROM_CART = 'removeFromCart';
 
 
 const initialState = {
@@ -28,7 +28,7 @@ export const cartReducer = createReducer(initialState, (builder) => {
     // Reducer for removing items from the cart
     .addCase(REMOVE_FROM_CART, (state, action) => {
       const itemId = action.payload;
-      state.cart = state?.cart?.filter((i) => i._id !== itemId);
+      state.cart = state?.cart?.filter((i) => i?._id !== itemId);
       localStorage.setItem("cartItems", JSON.stringify(state.cart));
     });
 });

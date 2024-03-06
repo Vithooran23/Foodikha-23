@@ -25,7 +25,7 @@ const AllSellers = () => {
     await axios
     .delete(`${server}/shop/delete-seller/${id}`, { withCredentials: true })
     .then((res) => {
-      toast.success(res.data.message);
+      toast.success(res.data?.message);
     });
 
   dispatch(getAllSellers());
@@ -104,7 +104,7 @@ const AllSellers = () => {
   sellers &&
   sellers.forEach((item) => {
       row.push({
-        id: item._id,
+        id: item?._id,
         name: item?.name,
         email: item?.email,
         joinedAt: item.createdAt.slice(0, 10),
