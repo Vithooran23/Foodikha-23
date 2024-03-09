@@ -72,7 +72,7 @@ const AllSellers = () => {
         renderCell: (params) => {
           return (
             <>
-            <Link to={`/shop/preview/${params.id}`}>
+            <Link to={`/shop/${params.id}`}>
             <Button>
                 <AiOutlineEye size={20} />
               </Button>

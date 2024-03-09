@@ -286,8 +286,8 @@ const ProductDetailsInfo = ({
             data.reviews.map((item, index) => (
               <div className="w-full flex my-2">
                 <img
-                  // src={`${item.user?.avatar?.url}`}
-                  src={`${foodi}`}
+                  src={`${item.user?.avatar?.url}`}
+                  
 
                   alt="Homemaker Image"
                   className="w-[50px] h-[50px] rounded-full"

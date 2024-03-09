@@ -34,11 +34,11 @@ const AdminDashboardMain = () => {
       headerName: "Status",
       minWidth: 130,
       flex: 0.7,
-      cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
-          ? "#3F1B11"
-          : "redColor";
-      },
+      // cellClassName: (params) => {
+      //   return params.getValue(params.id, "status") === "Delivered"
+      //     ? "#3F1B11"
+      //     : "redColor";
+      // },
     },
     {
       field: "itemsQty",

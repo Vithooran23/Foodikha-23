@@ -237,23 +237,23 @@ const App = () => {
         <Route
           path="/admin/dashboard"
           element={
-            // <ProtectedAdminRoute>
+            <ProtectedAdminRoute>
               <AdminDashboardPage />
-            // </ProtectedAdminRoute>
+             </ProtectedAdminRoute>
           }
         />
         <Route
           path="/admin-users"
           element={
-            // <ProtectedAdminRoute>
+            <ProtectedAdminRoute>
               <AdminDashboardUsers />
-            // </ProtectedAdminRoute>
+            </ProtectedAdminRoute>
           }
         />
         <Route
           path="/admin-sellers"
           element={
-            // <ProtectedAdminRoute>
+            <ProtectedAdminRoute>
               <AdminDashboardSellers />
             // </ProtectedAdminRoute>
           }
@@ -285,9 +285,9 @@ const App = () => {
         <Route
           path="/admin-withdraw-request"
           element={
-            // <ProtectedAdminRoute>
+            <ProtectedAdminRoute>
               <AdminDashboardWithdraw />
-            // </ProtectedAdminRoute>
+            </ProtectedAdminRoute>
           }
         />
       </Routes>

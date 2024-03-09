@@ -10,6 +10,8 @@ const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 const sendToken = require("../utils/jwtToken");
 const { isAuthenticated, isAdmin } = require("../middleware/auth");
+const cloudinary = require("cloudinary");
+
 
 
 
@@ -225,9 +227,9 @@ router.put(
   isAuthenticated,
   catchAsyncErrors(async (req, res, next) => {
     try {
-      let existsUser = await User.findById(req.user.id);
+      let existsUser = await User.findById(req.user?.id);
       if (req.body.avatar !== "") {
-        const imageId = existsUser.avatar.public_id;
+        const imageId = existsUser.avatar?.public_id;
 
         await cloudinary.v2.uploader.destroy(imageId);
 
@@ -237,7 +239,7 @@ router.put(
         });
 
         existsUser.avatar = {
-          public_id: myCloud.public_id,
+          public_id: myCloud?.public_id,
           url: myCloud.secure_url,
         };
       }
