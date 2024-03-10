@@ -4,7 +4,7 @@ import styles from '../../styles/styles'
 import EventCard from "./EventCard";
 
 const Events = () => {
-  // const {allEvents,isLoading} = useSelector((state) => state.event);  
+  const {allEvents,isLoading} = useSelector((state) => state.event);  
    
   return (
     <div>
@@ -20,13 +20,13 @@ const Events = () => {
             <EventCard  />
           
          }
-         {/* <h4>{
+         <h4>{
            allEvents?.length === 0 && (
             'No Events have!'
            )
           }
 
-         </h4> */}
+         </h4>
       </div>
      
     </div>

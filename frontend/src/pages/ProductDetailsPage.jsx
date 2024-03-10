@@ -5,7 +5,7 @@ import Header from "../components/Layout/Header";
 import ProductDetails from "../components/Products/ProductDetails";
 import SuggestedProduct from "../components/Products/SuggestedProduct";
 import { useSelector } from "react-redux";
-import ProductDetailsCard from "../components/Route/ProductDetailsCard/ProductDetailsCard";
+// import ProductDetailsCard from "../components/Route/ProductDetailsCard/ProductDetailsCard";
 
 const ProductDetailsPage = () => {
   const { allProducts } = useSelector((state) => state.product);
