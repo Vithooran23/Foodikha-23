@@ -9,7 +9,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { server } from "../../server";
