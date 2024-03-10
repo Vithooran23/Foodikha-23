@@ -22,6 +22,7 @@ router.post("/create-user", async (req, res, next) => {
       const userEmail = await User.findOne({ email });
   
       if (userEmail) {
+        
         return next(new ErrorHandler("User already exists", 400));
       }
   
@@ -58,8 +59,12 @@ router.post("/create-user", async (req, res, next) => {
     }
 
     } catch (error) {
+      console.log(error);
     return next(new ErrorHandler(error.message, 400));
+    
   }
+  
+  
 
   });
 

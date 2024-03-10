@@ -17,7 +17,10 @@ app.use(
   credentials:true, 
 })
 );
-app.use("/", express.static("uploads"))
+// app.use("/", express.static("uploads"))
+app.use("/test", (req, res) => {
+  res.send("Hello world!");
+});
 app.use(bodyParser.urlencoded({extended : true,limits : "50mb"}));
 
 // config

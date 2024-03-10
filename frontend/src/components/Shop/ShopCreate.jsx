@@ -7,7 +7,7 @@ import { server } from "../../server";
 import { toast } from "react-toastify";
 import { RxAvatar } from "react-icons/rx";
 
-const ShopCreate = () => {
+const ShopCreate = (data) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState();
@@ -44,6 +44,7 @@ const ShopCreate = () => {
         setPhoneNumber();
       })
       .catch((error) => {
+       console.log(error);
         toast.error(error.response.data.message);
         
       });
