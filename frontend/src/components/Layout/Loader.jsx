@@ -1,12 +1,12 @@
 import React from "react";
 import Lottie from "react-lottie";
-// import animationData from "../../Assests/image/animations/Success - 1709014670306.json";
+import animationData from "../../Assests/image/animations/Animation - 1709016118288.json";
 
 const Loader = () => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    // animationData: animationData,
+    animationData: animationData,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },

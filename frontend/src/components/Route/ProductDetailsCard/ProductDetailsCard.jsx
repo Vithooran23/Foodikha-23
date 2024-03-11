@@ -86,7 +86,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                 <img 
                 src={`${data?.images && data?.images[0]?.url}`} 
                 alt="" 
-                className="w-[90%]   mr-2 mt-6"
+                className="w-[90%] h-[30%]  mr-2 mt-6"
 
                 />
                 <div className="flex">

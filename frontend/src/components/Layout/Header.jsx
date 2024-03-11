@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 import Cart from "../Cart/Cart ";
 import Wishlist from "../Wishlist/Wishlist";
 import { RxCross1 } from "react-icons/rx";
-// import logo from "../../Assests/image/Foodikha_event.png";
+import logo from "../../Assests/image/Foodikha_event.png";
 import profile from "../../Assests/image/3.jpg";
 
 
@@ -61,7 +61,7 @@ const Header = ({ activeHeading }) => {
           <div>
             <Link to="/">
               <img
-                // src={`${logo}`}
+                src={`${logo}`}
                 className="w-[100px] h-[80px]  mr-1"
                 alt=""
               />
